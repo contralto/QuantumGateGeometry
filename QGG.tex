@@ -1,0 +1,332 @@
+\documentclass[11pt, letterpaper]{article}
+
+\usepackage[letterpaper, portrait, margin=1.6in]{geometry}
+\usepackage{cite}
+
+\usepackage{multicol}
+\usepackage{xcolor}
+
+\RequirePackage{fix-cm}
+\usepackage{layout}
+\def\isLong{false}
+\def\onecol{true}
+\newcommand{\myvspace}[1]{\vspace{0.0in}}
+\input{macros}
+\renewcommand{\myboldhead}[1]{\vspace{.1in}\hspace{-.14in}\textbf{#1.}}
+
+\renewcommand\bottomfraction{.3}
+
+\usepackage{layout}
+%\usepackage{hyperref}
+\usepackage{paracol}
+
+\graphicspath{{.}{./pictures/}}
+
+\usepackage{setspace}
+\usepackage[protrusion=true,expansion=true]{microtype}				% Better typography
+%\usepackage{titling}
+%\setlength{\droptitle}{-50pt}
+%\singlespacing
+%\onehalfspacing
+%\doublespacing
+\setstretch{1.2}
+
+
+\usepackage[english]{babel}	
+\usepackage{amsfonts}
+\usepackage{latexsym}
+\newcommand{\mydogblue}{XXX}%{{\color{gray} 
+
+\newcommand{\Line}{\mathbf{\Omega}} %boldsymbol{\ell}}
+%\newcommand{\Line}{\mathbcal{l}}
+\newcommand{\Point}{\mathbf P}
+\newcommand{\Plane}{\mathbf p}
+\newcommand{\PSS}{\mathbf{I}}
+\newcommand{\Vel}{{\mathbcal{v}}}
+\newcommand{\Mom}{{\mathbcal{m}}}
+\newcommand{\Force}{{\mathbcal{f}}}
+\newcommand{\NSBV}{{\mathbf{\Theta}}} % non-simple bivector
+\newcommand{\MOTOR}{motor\xspace}
+\newcommand{\MOTORS}{motors\xspace}
+\newcommand{\mogro}[1]{\mathfrak{M}_{#1,0,1}\xspace}
+%\renewcommand{\sigo}{\boldsymbol{\ell}_1}
+%\renewcommand{\momo}{\boldsymbol{\ell}_2}
+
+\begin{document}
+
+
+\title{\vspace{-1in} Quantum Gate Geometry}
+
+\author{Claudia Gonciulea \footnote{University of Michigan, Email: cgon@umich.com}
+\date{}
+}
+% The correct dates will be entered by the editor
+
+%\renewcommand*\contentsname{Overview}
+
+%\headers{Projective geometric algebra}{Charles G. Gunn}
+%\pagestyle{headings}
+
+
+%\layout{}
+\maketitle
+
+\begin{figure}[hb]
+	\centering
+	\def\xyz{1.0}
+	\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{arrows.png}}
+	\label{fig:sigcoll}
+\end{figure} 
+
+\newpage
+%\tableofcontents
+%\listoffigures
+%\listoftables
+
+\section{Introduction}
+This paper gives a geometric view of single-qubit quantum gates in the general case, and then explores this representation through specific single-qubit gates. The state of a single qubit is made up of two amplitudes, which are made up of complex numbers (or vectors). When a single-qubit quantum gate is applied to a qubit, the qubit’s amplitudes are scaled and added together. [relationship with linear algebra: gates act as matrix, multiply vectors and you get scaling and addition; gates change amplitudes in the same way a matrix breaks down a 2d vector and rescales it and adds it, which lends itself well to a geometric interpretation]  [relationship with bloch sphere] This paper gives a generalized geometric representation for these changes that can be applied to any single-qubit quantum gate. [a little more on this paper, will give examples]
+
+\myboldhead{Why geometry?}
+Amplitudes change according to the rules for scaling and adding 2d-vectors, or complex numbers.
+
+
+\section{Single-qubit quantum system state}
+\label{sec:state}
+
+A quantum state is made up of a number of quantum bits, or “qubits”. Similar to a classical bit, which outputs either 0 or 1, each qubit has two outcomes. This means that for a quantum state with n qubits there will be 2n outcomes. Further, each of these outcomes has a corresponding probability amplitude, which is a vector (or complex number) that gives information about the state. The norm of the amplitude, when squared, gives us the probability of an outcome. From this, it follows that the sum over the squares of the amplitudes of a quantum state must equal 1, as the sum of the probabilities of all outcomes in a system must equal 1. Given the amplitudes of every outcome in a quantum state, we get a probability distribution of each of the outcomes like in the state below.
+
+\includegraphics[width=\textwidth]{example-image-a}
+
+In this paper, the quantum state uses a single qubit. So, there are only two amplitudes (or, two vectors) in the state,
+\begin{equation}
+	\begin{pmatrix} a_0  \\ a_1 \end{pmatrix},
+\end{equation}
+
+with the condition $|a_0|^2 + |a_1|^2 = 1$.
+
+  \begin{figure}[hbt]
+	\begin{centering}
+		\ifthenelse{\equal{\onecol}{true}}{ \def\xyz{.3}}{ \def\xyz{.36}}
+		\def\zyx{.005}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{QuantumState.png}}}\hspace{\zyx\columnwidth}
+		
+		\caption{Quantum State.} 
+		\label{fig:state}
+	\end{centering}
+\end{figure}
+\myvspace{-.1in}
+
+
+\newpage
+
+\section{Single-qubit quantum gates}
+\label{sec:gates}
+A single-qubit quantum gate is a linear transformation of two amplitudes that preserves their sum of the squared lengths. We will use the term arrows, following Feynman.
+
+The  two arrows correspond to outcomes of a quantum computation that are identical except in the position corresponding to the target qubit. One has 0, and the other has 1 in that position. We may use the term \quot{bad} for the former and \quot{good} for the latter, and use red and green colors for their representation, respectively.
+
+Relevant things to mention:
+\begin{compactitem}
+\item  general matrix form 
+\item  role of $cos$ and $sin$
+\item constraints, law of cosines
+\end{compactitem}
+
+\begin{equation}
+	\begin{pmatrix} e^{i\alpha_0}\cos\frac{\theta}{2}  \\  e^{i\alpha_1}\sin\frac{\theta}{2} \end{pmatrix}
+\end{equation}
+
+\begin{equation}
+	\begin{pmatrix} e^{i\alpha_1}\cos\frac{\theta}{2} & e^{i\alpha_3}\sin\frac{\theta}{2}\\  e^{i\alpha_2}\sin\frac{\theta}{2} &  e^{i\alpha_4}\cos\frac{\theta}{2} \end{pmatrix}
+\end{equation}
+
+$$\alpha_1 - \alpha_2  - \alpha_3  + \alpha_4 = \text{odd multiple of }\pi$$
+
+We can restrict our attention to the case when  $alpha_1$ and $alpha_4$ are $0$, by rotating the initial amplitudes first. Describe the geometry for this case, Law of Cosines, etc.
+
+Columns specify how current amplitudes are broken. Rows specify how new amplitudes are built.
+
+Amplitude transformation:
+
+\begin{equation}
+	\begin{pmatrix}b_0 \\ b_1 \end{pmatrix} =
+		\begin{pmatrix} e^{i\alpha_1}\cos\frac{\theta}{2} & e^{i\alpha_3}\sin\frac{\theta}{2}\\  e^{i\alpha_2}\sin\frac{\theta}{2} &  e^{i\alpha_4}\cos\frac{\theta}{2} \end{pmatrix}
+	\begin{pmatrix} a_0 \\ a_1 \end{pmatrix}
+\end{equation}
+
+or, equivalently:
+
+\begin{eqnarray*}
+	b_0 = a_0e^{i\alpha_1}\cos\frac{\theta}{2}  +  a_1e^{i\alpha_3}\sin\frac{\theta}{2} \\
+	b_1 = a_0e^{i\alpha_2}sin\frac{\theta}{2} + a_1e^{i\alpha_4}\cos\frac{\theta}{2}
+\end{eqnarray*}
+
+
+Geometrically, add scaled and rotated versions of the original amplitudes. The scaling factors are  $\cos\frac{\theta}{2}$ and $sin\frac{\theta}{2}$ for each amplitude, resulting in four pieces.
+
+\begin{figure}[hbt]
+	\begin{centering}
+		\ifthenelse{\equal{\onecol}{true}}{ \def\xyz{.3}}{ \def\xyz{.36}}
+		\def\zyx{.005}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{GenericGate_step1.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{GenericGate_step2.png}}}\hspace{\zyx\columnwidth} \\ \vspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{GenericGate_step3.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{GenericGate_step4.png}}}
+		\caption{Generic Gate.} 
+		\label{fig:generic_gate}
+	\end{centering}
+\end{figure}
+\myvspace{-.1in}
+
+\newpage
+
+\section{Examples}
+\label{sec:examples}
+Discuss the arrow representation of some of the well-known single-qubit gates, in particular rotations.
+
+\newpage
+
+\subsection{Y-rotations}
+$R_Y(\theta)$ for $\theta$ real.
+
+Matrix:
+
+\begin{equation}
+	\begin{pmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2}\\  \sin\frac{\theta}{2} &  \cos\frac{\theta}{2} \end{pmatrix}
+\end{equation}
+
+Amplitude transformation:
+
+\begin{equation}
+	\begin{pmatrix}b_0 \\ b_1 \end{pmatrix} =
+	\begin{pmatrix} \cos\frac{\theta}{2} & -\sin\frac{\theta}{2}\\  \sin\frac{\theta}{2} &  \cos\frac{\theta}{2} \end{pmatrix}
+	\begin{pmatrix} a_0 \\ a_1 \end{pmatrix}
+\end{equation}
+
+or, equivalently:
+
+\begin{eqnarray*}
+	 b_0 = a_0\cos\frac{\theta}{2} - a_1\sin\frac{\theta}{2} \\
+	 b_1 = a_0sin\frac{\theta}{2} + a_1\cos\frac{\theta}{2}
+\end{eqnarray*}
+
+Geometrically, add scaled and rotated versions of the original amplitudes.
+  \begin{figure}[hbt]
+	\begin{centering}
+		\ifthenelse{\equal{\onecol}{true}}{ \def\xyz{.3}}{ \def\xyz{.36}}
+		\def\zyx{.005}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RY1_step1.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RY1_step2.png}}}\hspace{\zyx\columnwidth} \\ \vspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RY1_step3.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RY1_step4.png}}}
+		\caption{RY applied to a general state.} 
+		\label{fig:ry1}
+	\end{centering}
+\end{figure}
+
+  \begin{figure}[hbt]
+	\begin{centering}
+		\ifthenelse{\equal{\onecol}{true}}{ \def\xyz{.3}}{ \def\xyz{.36}}
+		\def\zyx{.005}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RY_step1.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RY_step2.png}}}\hspace{\zyx\columnwidth} \\ \vspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RY_step3.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RY_step4.png}}}
+		\caption{RY applied to a state created by RY.} 
+		\label{fig:ry}
+	\end{centering}
+\end{figure}
+\myvspace{-.1in}
+
+\newpage
+
+\subsection{X-rotations}
+$R_X(\theta)$ for $\theta$ real.
+
+\begin{equation}
+	\begin{pmatrix} \cos\frac{\theta}{2} & -i\sin\frac{\theta}{2}\\  -i\sin\frac{\theta}{2} &  \cos\frac{\theta}{2} \end{pmatrix}
+\end{equation}
+
+Amplitude transformation:
+
+\begin{equation}
+	\begin{pmatrix}b_0 \\ b_1 \end{pmatrix} =
+	\begin{pmatrix} \cos\frac{\theta}{2} & -i\sin\frac{\theta}{2}\\  -i\sin\frac{\theta}{2} &  \cos\frac{\theta}{2} \end{pmatrix}
+	\begin{pmatrix} a_0 \\ a_1 \end{pmatrix}
+\end{equation}
+
+or, equivalently:
+
+\begin{eqnarray*}
+	b_0 = a_0\cos\frac{\theta}{2} - a_1i\sin\frac{\theta}{2} \\
+	b_1 = -a_0isin\frac{\theta}{2} + a_1\cos\frac{\theta}{2}
+\end{eqnarray*}
+
+
+Geometrically, add scaled and rotated versions of the original amplitudes.
+
+  \begin{figure}[hbt]
+	\begin{centering}
+		\ifthenelse{\equal{\onecol}{true}}{ \def\xyz{.3}}{ \def\xyz{.36}}
+		\def\zyx{.005}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RX1_step1.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RX1_step2.png}}}\hspace{\zyx\columnwidth} \\ \vspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RX1_step3.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RX1_step4.png}}}
+		\caption{RX applied to a general state.} 
+		\label{fig:rx1}
+	\end{centering}
+\end{figure}
+
+  \begin{figure}[hbt]
+	\begin{centering}
+		\ifthenelse{\equal{\onecol}{true}}{ \def\xyz{.3}}{ \def\xyz{.36}}
+		\def\zyx{.005}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RX_step1.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RX_step2.png}}}\hspace{\zyx\columnwidth} \\ \vspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RX_step3.png}}}\hspace{\zyx\columnwidth}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{RX_step4.png}}}
+		\caption{RX applied to a state created by RX.} 
+		\label{fig:rx}
+	\end{centering}
+\end{figure}
+\myvspace{-.1in}
+ 
+ \newpage
+ \subsection{Nice rotations}
+\label{sec:rot}
+
+Nice rotation. Modified $R_X$. $P$ is the phase shift gate.
+
+$$e^{i\theta/2}R_X(\theta)$$
+
+$$HP(\theta)H$$
+
+$$R_X(\pi/2)P(\theta)R_X(-\pi/2)$$
+
+
+ \section{Inverses}
+ Show how rotations of negative angles restore the original arrows.
+ 
+  \section{Connection with the Bloch sphere}
+Show connection.
+ 
+ \section{Conclusion}
+ We have established...
+  \cite{gunn2017b}
+
+%\section*{Acknowledgements} Thanks to ... for stimulating conversations and helpful feedback during the preparation of these notes.
+
+
+%\section{Conclusion}
+
+\ifthenelse{\equal{\isLong}{false}}
+{}
+
+\bibliography{ref}
+\bibliographystyle{alpha}
+
+\newpage
+
+%\end{compactenum}
+\end{document}

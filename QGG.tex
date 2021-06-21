@@ -3,6 +3,8 @@
 \usepackage[letterpaper, portrait, margin=1.6in]{geometry}
 \usepackage{cite}
 
+\usepackage{float}
+
 \usepackage{multicol}
 \usepackage{xcolor}
 
@@ -55,7 +57,7 @@
 \begin{document}
 
 
-\title{\vspace{-1in} Quantum Gate Geometry}
+\title{\vspace{-1in} Quantum Gate Geometry\\ {[Work In Progress]}}
 
 \author{Claudia Gonciulea \footnote{University of Michigan, Email: cgon@umich.com}
 \date{}
@@ -74,7 +76,7 @@
 \begin{figure}[hb]
 	\centering
 	\def\xyz{1.0}
-	\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{arrows.png}}
+	\setlength\fboxsep{0pt}\fbox{\includegraphics[trim=0 100 0 30, clip, width=\xyz\columnwidth]{./figures/fig4.png}}
 	\label{fig:sigcoll}
 \end{figure} 
 
@@ -84,7 +86,7 @@
 %\listoftables
 
 \section{Introduction}
-This paper gives a geometric view of single-qubit quantum gates in the general case, and then explores this representation through specific single-qubit gates. The state of a single qubit is made up of two amplitudes, which are made up of complex numbers (or vectors). When a single-qubit quantum gate is applied to a qubit, the qubit’s amplitudes are scaled and added together. [relationship with linear algebra: gates act as matrix, multiply vectors and you get scaling and addition; gates change amplitudes in the same way a matrix breaks down a 2d vector and rescales it and adds it, which lends itself well to a geometric interpretation]  [relationship with bloch sphere] This paper gives a generalized geometric representation for these changes that can be applied to any single-qubit quantum gate. [a little more on this paper, will give examples]
+This paper gives a geometric view of single-qubit quantum gates in the general case, and then explores this representation through specific single-qubit gates. The state of a single qubit is made up of two amplitudes, which are made up of complex numbers (or vectors). When a single-qubit quantum gate is applied to a qubit, the qubit’s amplitudes are scaled and added together. [Relationship with linear algebra: gates act as matrix, multiply vectors and you get scaling and addition; gates change amplitudes in the same way a matrix breaks down a 2d vector and rescales it and adds it, which lends itself well to a geometric interpretation.]  [Relationship with bloch sphere.] This paper gives a generalized geometric representation for these changes that can be applied to any single-qubit quantum gate.
 
 \myboldhead{Why geometry?}
 Amplitudes change according to the rules for scaling and adding 2d-vectors, or complex numbers.
@@ -93,9 +95,28 @@ Amplitudes change according to the rules for scaling and adding 2d-vectors, or c
 \section{Single-qubit quantum system state}
 \label{sec:state}
 
-A quantum state is made up of a number of quantum bits, or “qubits”. Similar to a classical bit, which outputs either 0 or 1, each qubit has two outcomes. This means that for a quantum state with n qubits there will be 2n outcomes. Further, each of these outcomes has a corresponding probability amplitude, which is a vector (or complex number) that gives information about the state. The norm of the amplitude, when squared, gives us the probability of an outcome. From this, it follows that the sum over the squares of the amplitudes of a quantum state must equal 1, as the sum of the probabilities of all outcomes in a system must equal 1. Given the amplitudes of every outcome in a quantum state, we get a probability distribution of each of the outcomes like in the state below.
+A quantum system is made up of a number of quantum bits, or “qubits”. Similar to a classical bit, which outputs either 0 or 1, each qubit has two outcomes when measured. This means that for a quantum system with n qubits there will be $2^n$ outcomes. Further, each of these outcomes has a corresponding probability amplitude (or vector) whose norm, when squared, gives us the probability of an outcome. From this, it follows that the sum of the squares of the amplitudes in a quantum system must equal 1, as the sum of the probabilities of all outcomes in a system must equal 1. Given the amplitudes of every outcome in a quantum state, we get a probability distribution of each of the outcomes, as in the 4-qubit state below.
 
-\includegraphics[width=\textwidth]{example-image-a}
+\begin{figure}[hbt]
+	\begin{centering}
+		\ifthenelse{\equal{\onecol}{true}}{ \def\xyz{.3}}{ \def\xyz{.36}}
+		\def\zyx{.005}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{./figures/amplitudes.png}}}\hspace{\zyx\columnwidth}
+		
+		\caption{Amplitudes in Quantum State.} 
+		\label{fig:state}
+	\end{centering}
+\end{figure}
+\begin{figure}[hbt]
+	\begin{centering}
+		\ifthenelse{\equal{\onecol}{true}}{ \def\xyz{.3}}{ \def\xyz{.36}}
+		\def\zyx{.005}
+		{\setlength\fboxsep{0pt}\fbox{\includegraphics[width=\xyz\columnwidth]{./figures/probabilities.png}}}\hspace{\zyx\columnwidth}
+		
+		\caption{Probabilities in Quantum State.} 
+		\label{fig:state}
+	\end{centering}
+\end{figure}
 
 In this paper, the quantum state uses a single qubit. So, there are only two amplitudes (or, two vectors) in the state,
 \begin{equation}
@@ -177,6 +198,31 @@ Geometrically, add scaled and rotated versions of the original amplitudes. The s
 	\end{centering}
 \end{figure}
 \myvspace{-.1in}
+
+\begin{figure}[H]
+	\centering
+	\def\xyz{1.0}
+	\setlength\fboxsep{0pt}\fbox{\includegraphics[trim=0 0 0 0, clip, width=\xyz\columnwidth]{./figures/fig1.png}}
+	\label{fig:sigcoll}
+\end{figure} 
+\myvspace{-.1in}
+
+\begin{figure}[H]
+	\centering
+	\def\xyz{1.0}
+	\setlength\fboxsep{0pt}\fbox{\includegraphics[trim=0 0 0 0, clip, width=\xyz\columnwidth]{./figures/fig2.png}}
+	\label{fig:sigcoll}
+\end{figure} 
+\myvspace{-.1in}
+
+\begin{figure}[H]
+	\centering
+	\def\xyz{1.0}
+	\setlength\fboxsep{0pt}\fbox{\includegraphics[trim=0 0 0 0, clip, width=\xyz\columnwidth]{./figures/fig4.png}}
+	\label{fig:sigcoll}
+\end{figure} 
+\myvspace{-.1in}
+
 
 \newpage
 
